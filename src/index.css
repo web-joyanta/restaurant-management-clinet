@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@theme {
+    --color-custom-orange: #d26f2d;
+    --color-custom-green: #39c674;
+    --color-custom-red: #dc2828;
+    --color-custom-gray: #7c716a;
+    --color-custom-red-bg: #f6f3ee;
+}
+
+@utility btn-orange {
+    color: white;
+    font-size: 500;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #d26f2d;
+}

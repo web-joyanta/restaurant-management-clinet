@@ -9,7 +9,7 @@ const Features = () => {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="text-center p-6 bg-white rounded-xl shadow-2xl ">
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#d26f2d] text-white mb-4">
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-custom-orange text-white mb-4">
                                 <Clock className="h-8 w-8" />
                             </div>
                             <h3 className="text-xl font-semibold mb-2">Fast Delivery</h3>
@@ -17,7 +17,7 @@ const Features = () => {
                         </div>
 
                         <div className="text-center p-6 bg-white rounded-xl shadow-2xl">
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#d26f2d] text-white mb-4">
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-custom-orange text-white mb-4">
                                 <ChefHat className="h-8 w-8" />
                             </div>
                             <h3 className="text-xl font-semibold mb-2">Quality Ingredients</h3>
@@ -25,7 +25,7 @@ const Features = () => {
                         </div>
 
                         <div className="text-center p-6 bg-white rounded-xl shadow-2xl">
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#d26f2d] text-white mb-4">
+                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-custom-orange text-white mb-4">
                                 <Star className="h-8 w-8" />
                             </div>
                             <h3 className="text-xl font-semibold mb-2">Top Rated</h3>

@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => removeEventListener('scroll', handleScroll);
+    }, []);
+
     const links = <>
-        <li><NavLink className="font-medium hover:text-[#d26f2d] text-[15px]">Home</NavLink></li>
-        <li><NavLink className="font-medium hover:text-[#d26f2d] text-[15px]">All Foods</NavLink></li>
-        <li><NavLink className="font-medium hover:text-[#d26f2d] text-[15px]">Gallery</NavLink></li>
+        <li><NavLink to="/" className="font-medium hover:text-custom-orange text-[15px]">Home</NavLink></li>
+        <li><NavLink className="font-medium hover:text-custom-orange text-[15px]">All Foods</NavLink></li>
+        <li><NavLink className="font-medium hover:text-custom-orange text-[15px]">Gallery</NavLink></li>
     </>
+
     return (
-        <nav className="fixed navbar bg-base-100 shadow-sm z-50">
+        <nav className={`navbar sticky top-0 left-0 shadow-sm z-50 transition-all duration-500 ${isScrolled
+            ? "bg-white/80 shadow-md backdrop-blur"
+            : "bg-transparent"
+            }`} >
             {/* nav container */}
             <div className='flex container mx-auto px-4'>
                 <div className="navbar-start">
@@ -24,12 +43,12 @@ const Navbar = () => {
                     </div>
                     {/* logo lg start */}
                     <div className='hidden lg:flex'>
-                        <Link className="text-xl text-[#d26f2d] font-bold">DelightBites</Link>
+                        <Link className="text-xl text-custom-orange font-bold">DelightBites</Link>
                     </div>
                 </div>
                 {/* logo sm center */}
                 <div className='navbar-center lg:hidden'>
-                    <Link className="text-xl text-[#d26f2d] font-bold">DelightBites</Link>
+                    <Link className="text-xl text-custom-orange font-bold">DelightBites</Link>
                 </div>
                 <div className="navbar-end">
                     {/* nav links lg */}
@@ -38,8 +57,12 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
+                    {/* login button  */}
+                    <button>
+                        <Link to="/auth" className='btn btn-orange'>Login</Link>
+                    </button>
                     {/* profile */}
-                    <div className="dropdown dropdown-end ">
+                    {/* <div className="dropdown dropdown-end ">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-15 rounded-full">
                                 <img
@@ -51,11 +74,11 @@ const Navbar = () => {
                         <ul
                             tabIndex="-1"
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><Link className="hover:bg-[#39c674] hover:text-white text-[15px]">My Foods</Link></li>
-                            <li><Link className="hover:bg-[#39c674] hover:text-white text-[15px]">Add Food</Link></li>
-                            <li><Link className="hover:bg-[#39c674] hover:text-white text-[15px] text-[#dc2828]">Logout</Link></li>
+                            <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">My Foods</Link></li>
+                            <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">Add Food</Link></li>
+                            <li><Link className="hover:bg-custom-green hover:text-white text-[15px] text-custom-red">Logout</Link></li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </nav>

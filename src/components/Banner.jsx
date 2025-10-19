@@ -15,7 +15,7 @@ const Banner = () => {
                     <p className="text-lg md:text-xl">
                         Order your favorite dishes and experience culinary excellence delivered to your door.
                     </p>
-                    <button className="btn text-[#d26f2d]">
+                    <button className="btn text-custom-orange">
                         <Link>Explore All Foods</Link>
                     </button>
                 </div>
