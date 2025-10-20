@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const { user, loading } = useAuth();
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,6 +26,13 @@ const Navbar = () => {
         <li><NavLink className="font-medium hover:text-custom-orange text-[15px]">Gallery</NavLink></li>
     </>
 
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-gray-100">
+                <span className="loading loading-spinner text-orange-500 text-9xl"></span>
+            </div>
+        );
+    }
     return (
         <nav className={`navbar sticky top-0 left-0 shadow-sm z-50 transition-all duration-500 ${isScrolled
             ? "bg-white/80 shadow-md backdrop-blur"
@@ -57,28 +67,32 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    {/* login button  */}
-                    <button>
-                        <Link to="/auth" className='btn btn-orange'>Login</Link>
-                    </button>
-                    {/* profile */}
-                    {/* <div className="dropdown dropdown-end ">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-15 rounded-full">
-                                <img
-                                    referrerPolicy='no-referrer'
-                                    alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+
+                    {/* user ? profile : login button */}
+                    {user?.email ? (
+                        <div className="dropdown dropdown-end ">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div title={user?.displayName} className='w-10 rounded-full'>
+                                    <img
+                                        referrerPolicy='no-referrer'
+                                        alt='User Profile Photo'
+                                        src={user?.photoURL} />
+                                </div>
                             </div>
+                            <ul
+                                tabIndex="-1"
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">My Foods</Link></li>
+                                <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">Add Food</Link></li>
+                                <li><Link className="hover:bg-custom-green hover:text-white text-[15px] text-custom-red">Logout</Link></li>
+                            </ul>
                         </div>
-                        <ul
-                            tabIndex="-1"
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">My Foods</Link></li>
-                            <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">Add Food</Link></li>
-                            <li><Link className="hover:bg-custom-green hover:text-white text-[15px] text-custom-red">Logout</Link></li>
-                        </ul>
-                    </div> */}
+                    ) : (
+                        <button>
+                            <Link to="/auth" className='btn btn-orange'>Login</Link>
+                        </button>
+                    )}
+
                 </div>
             </div>
         </nav>

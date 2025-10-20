@@ -2,9 +2,13 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import useAuth from "../hooks/useAuth";
 
 const Auth = () => {
-
+    const { singWithGoogle } = useAuth();
+    const handleGoogleSignIn = () => {
+        singWithGoogle();
+    };
     return (
         <div className='bg-custom-red-bg'>
             <div className="container mx-auto px-4 min-h-[calc(100vh-64px)] flex flex-col justify-center items-center">
@@ -30,13 +34,14 @@ const Auth = () => {
                             <form className="card-body">
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
-                                    <input type="email" className="input w-full" placeholder="Email" />
+                                    <input type="email" autoComplete="email" className="input w-full" placeholder="Email" />
                                     <label className="label">Password</label>
-                                    <input type="password" className="input w-full" placeholder="Password" />
+                                    <input type="password" autoComplete="current-password" className="input w-full" placeholder="Password" />
                                     <div><Link className="link link-hover">Forgot password?</Link></div>
 
                                     <button
                                         type="button"
+                                        onClick={handleGoogleSignIn}
                                         className="btn w-full mt-4 flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-gray-50"
                                         aria-label="Continue with Google">
                                         <FcGoogle className="text-lg" />
@@ -53,13 +58,13 @@ const Auth = () => {
                             <form className="card-body">
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
-                                    <input type="text" className="input w-full" placeholder="Your Name" />
+                                    <input type="text" autoComplete="name" className="input w-full" placeholder="Your Name" />
                                     <label className="label">Email</label>
-                                    <input type="email" className="input w-full" placeholder="Email" />
+                                    <input type="email" autoComplete="email" className="input w-full" placeholder="Email" />
                                     <label className="label">Password</label>
-                                    <input type="password" className="input w-full" placeholder="Password" />
+                                    <input type="password" autoComplete="new-password" className="input w-full" placeholder="Password" />
                                     <label className="label">Confirm Password</label>
-                                    <input type="password" className="input w-full" placeholder="Password" />
+                                    <input type="password" autoComplete="new-password" className="input w-full" placeholder="Password" />
 
                                     <button
                                         type="button"
