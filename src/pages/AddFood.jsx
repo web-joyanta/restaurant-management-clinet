@@ -1,8 +1,131 @@
+import useAuth from "../hooks/useAuth";
 
 const AddFood = () => {
+    const { user } = useAuth?.() || {};
+    const categories = ["Starter", "Traditional", "Dessert", "Beverage", "Side"];
+
+
     return (
-        <div>
-            
+        <div className="min-h-screen bg-gray-50 ">
+            <div className="bg-custom-orange text-white text-center py-16 mb-12">
+                <h2 className="text-5xl font-bold">Add Food</h2>
+                <p className="text-lg font-mono pt-2">Share your delicious creation</p>
+            </div>
+            <div className="max-w-3xl mx-auto bg-white shadow rounded-lg p-6 my-12">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Food Details</h2>
+
+                <form className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Food Name</label>
+                        <input
+                            name="name"
+                            className="input w-full mt-1"
+                            placeholder="e.g. Spicy Chicken Curry"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Food Image (URL)</label>
+                        <input
+                            name="image"
+                            type="url"
+                            className="input w-full mt-1"
+                            placeholder="https://example.com/image.jpg"
+                            required
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Category</label>
+                            <select
+                                name="category"
+                                className="input w-full mt-1"
+                                required
+                            >
+                                {categories.map((c) => (
+                                    <option key={c} value={c}>
+                                        {c}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Quantity</label>
+                            <input
+                                name="quantity"
+                                type="number"
+                                min="0"
+                                className="input w-full mt-1"
+                                placeholder="0"
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Price($)</label>
+                            <input
+                                name="price"
+                                type="number"
+                                step="0.01"
+                                min="0"
+                                className="input w-full mt-1"
+                                placeholder="0.00"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Add By (name & email)</label>
+                        <div className="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <input
+                                value={user?.displayName || user?.name || ""}
+                                readOnly
+                                className="input w-full bg-gray-100"
+                                placeholder="Name"
+                            />
+                            <input
+                                value={user?.email || ""}
+                                readOnly
+                                className="input w-full bg-gray-100"
+                                placeholder="Email"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Food Origin (Country)</label>
+                        <input
+                            name="origin"
+                            className="input w-full mt-1"
+                            placeholder="e.g. India"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">Short Description</label>
+                        <textarea
+                            name="description"
+                            rows="5"
+                            className="input w-full mt-1 textarea"
+                            placeholder="Ingredients, making procedure, etc."
+                            required
+                        />
+                    </div>
+
+                    <div className="pt-2">
+                        <button
+                            type="submit"
+                            className="btn btn-orange w-full"
+                        > Add Food Item
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
