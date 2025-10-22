@@ -1,9 +1,62 @@
+import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../hooks/useAuth";
+import useAxios from "../hooks/useAxios";
+import toast from "react-hot-toast";
 
 const AddFood = () => {
     const { user } = useAuth?.() || {};
     const categories = ["Starter", "Traditional", "Dessert", "Beverage", "Side"];
+    const axiosInstance = useAxios();
+    const queryClient = useQueryClient();
 
+    // Mutation for adding food item
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: async (fromData) => {
+            await axiosInstance.post("/foods", fromData);
+        },
+        onSuccess: () => {
+            toast.success("Food item added successfully!");
+            queryClient.invalidateQueries({ queryKey: ['foods'] });
+        },
+        onError: (error) => {
+            toast.error(`Error adding food item: ${error.message}`);
+        }
+    });
+
+    // Handle form submission
+    const handleAddFood = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const image = form.image.value;
+        const category = form.category.value;
+        const quantity = form.quantity.value;
+        const price = form.price.value;
+        const origin = form.origin.value;
+        const description = form.description.value;
+        const fromData = {
+            name,
+            image,
+            category,
+            quantity: Number(quantity),
+            price: Number(price),
+            description,
+            origin,
+            addedBy: {
+                name: user?.displayName || "Anonymous",
+                email: user?.email || "No Email"
+            },
+        };
+
+        // Submit the form data
+        try {
+            await mutateAsync(fromData);
+            form.reset();
+        } catch (err) {
+            toast.error(err.message);
+        }
+
+    };
 
     return (
         <div className="min-h-screen bg-gray-50 ">
@@ -14,7 +67,7 @@ const AddFood = () => {
             <div className="max-w-3xl mx-auto bg-white shadow rounded-lg p-6 my-12">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Food Details</h2>
 
-                <form className="space-y-4">
+                <form onSubmit={handleAddFood} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Food Name</label>
                         <input
@@ -121,7 +174,7 @@ const AddFood = () => {
                         <button
                             type="submit"
                             className="btn btn-orange w-full"
-                        > Add Food Item
+                        > {isPending ? "Adding..." : "Add Food"}
                         </button>
                     </div>
                 </form>
