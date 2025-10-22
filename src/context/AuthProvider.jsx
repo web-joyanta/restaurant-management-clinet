@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/firebase.config';
 // eslint-disable-next-line react-refresh/only-export-components
@@ -23,6 +23,12 @@ const AuthProvider = ({ children }) => {
             displayName: name,
             photoURL: photo
         });
+    }
+
+    // Login user
+    const signInUser = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password);
     }
 
     // Google sign in
@@ -54,6 +60,7 @@ const AuthProvider = ({ children }) => {
         loading,
         createUser,
         updateUserProfile,
+        signInUser,
         singWithGoogle,
         logOut,
     };

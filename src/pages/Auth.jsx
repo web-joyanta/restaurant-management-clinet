@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const Auth = () => {
 
-    const { createUser, updateUserProfile, singWithGoogle } = useAuth();
+    const { createUser, updateUserProfile, signInUser, singWithGoogle } = useAuth();
 
     // Create new user
     const handleCreateUser = (e) => {
@@ -46,11 +46,25 @@ const Auth = () => {
         }
     };
 
+    // Sign in user
+    const handleSingInUser = (e) => {
+        e.preventDefault();
+        const from = e.target;
+        const email = from.email.value;
+        const password = from.password.value;
+        try {
+            signInUser(email, password);
+            toast.success("Logged in successfully!");
+            from.reset();
+        } catch (err) {
+            toast.error(err.message);
+        }
+    }
+
     // Google sign in
     const handleGoogleSignIn = () => {
         singWithGoogle();
     };
-
 
     return (
         <div className='bg-custom-red-bg'>
@@ -74,12 +88,12 @@ const Auth = () => {
 
                         {/* Login */}
                         <TabPanel>
-                            <form className="card-body">
+                            <form onSubmit={handleSingInUser} className="card-body">
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
-                                    <input type="email" autoComplete="email" className="input w-full" placeholder="Email" />
+                                    <input name="email" type="email" autoComplete="email" className="input w-full" placeholder="Email" />
                                     <label className="label">Password</label>
-                                    <input type="password" autoComplete="current-password" className="input w-full" placeholder="Password" />
+                                    <input name="password" type="password" autoComplete="current-password" className="input w-full" placeholder="Password" />
                                     <div><Link className="link link-hover">Forgot password?</Link></div>
 
                                     <button onClick={handleGoogleSignIn}
