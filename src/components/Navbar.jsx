@@ -4,7 +4,13 @@ import useAuth from '../hooks/useAuth';
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
-    const { user, loading } = useAuth();
+    const { user, logOut, loading } = useAuth();
+
+    const handleLogOut = () => {
+        logOut();
+    }
+
+    
 
 
     useEffect(() => {
@@ -84,7 +90,7 @@ const Navbar = () => {
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                                 <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">My Foods</Link></li>
                                 <li><Link className="hover:bg-custom-green hover:text-white text-[15px]">Add Food</Link></li>
-                                <li><Link className="hover:bg-custom-green hover:text-white text-[15px] text-custom-red">Logout</Link></li>
+                                <li onClick={handleLogOut}><Link className="hover:bg-custom-green hover:text-white text-[15px] text-custom-red">Logout</Link></li>
                             </ul>
                         </div>
                     ) : (

@@ -3,12 +3,55 @@ import { Link } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Auth = () => {
-    const { singWithGoogle } = useAuth();
+
+    const { createUser, updateUserProfile, singWithGoogle } = useAuth();
+
+    // Create new user
+    const handleCreateUser = (e) => {
+        e.preventDefault();
+        const from = e.target;
+        const name = from.name.value;
+        const email = from.email.value;
+        const photo = from.photo.value;
+        const password = from.password.value;
+        const confirm = from.confirm.value;
+        // Regex for password rule
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        // Check password strength
+        if (!passwordRegex.test(password)) {
+            toast.error("Password must have uppercase, lowercase, and at least 6 characters.");
+            return;
+        }
+        // Confirm password check
+        if (password !== confirm) {
+            toast.error("Passwords do not match.");
+            return;
+        }
+
+        // Create user
+        try {
+            createUser(email, password)
+                // Update profile with name and photo
+                .then(() => {
+                    updateUserProfile(name, photo);
+                });
+
+            toast.success("User created successfully!");
+            from.reset();
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
+
+    // Google sign in
     const handleGoogleSignIn = () => {
         singWithGoogle();
     };
+
+
     return (
         <div className='bg-custom-red-bg'>
             <div className="container mx-auto px-4 min-h-[calc(100vh-64px)] flex flex-col justify-center items-center">
@@ -39,9 +82,8 @@ const Auth = () => {
                                     <input type="password" autoComplete="current-password" className="input w-full" placeholder="Password" />
                                     <div><Link className="link link-hover">Forgot password?</Link></div>
 
-                                    <button
+                                    <button onClick={handleGoogleSignIn}
                                         type="button"
-                                        onClick={handleGoogleSignIn}
                                         className="btn w-full mt-4 flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-gray-50"
                                         aria-label="Continue with Google">
                                         <FcGoogle className="text-lg" />
@@ -55,18 +97,20 @@ const Auth = () => {
 
                         {/* sing up */}
                         <TabPanel>
-                            <form className="card-body">
+                            <form onSubmit={handleCreateUser} className="card-body">
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
-                                    <input type="text" autoComplete="name" className="input w-full" placeholder="Your Name" />
+                                    <input name="name" type="text" required autoComplete="name" className="input w-full" placeholder="Your Name" />
                                     <label className="label">Email</label>
-                                    <input type="email" autoComplete="email" className="input w-full" placeholder="Email" />
+                                    <input name="email" type="email" required autoComplete="email" className="input w-full" placeholder="Email" />
+                                    <label className="label">Photo</label>
+                                    <input name="photo" type="url" required autoComplete="name" className="input w-full" placeholder="Photo url" />
                                     <label className="label">Password</label>
-                                    <input type="password" autoComplete="new-password" className="input w-full" placeholder="Password" />
+                                    <input name="password" type="password" required autoComplete="new-password" className="input w-full" placeholder="Password" />
                                     <label className="label">Confirm Password</label>
-                                    <input type="password" autoComplete="new-password" className="input w-full" placeholder="Password" />
+                                    <input name="confirm" type="password" required autoComplete="new-password" className="input w-full" placeholder="password" />
 
-                                    <button
+                                    <button onClick={handleGoogleSignIn}
                                         type="button"
                                         className="btn w-full mt-4 flex items-center justify-center gap-2 py-2 border rounded-md hover:bg-gray-50"
                                         aria-label="Continue with Google">
