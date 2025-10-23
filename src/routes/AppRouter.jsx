@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import Auth from "../Pages/Auth";
 import ErrorPage from "../pages/ErrorPage";
 import AddFood from "../pages/AddFood";
+import PrivateRoute from "./PrivateRoute";
 
 
 const AppRoute = createBrowserRouter([
@@ -22,7 +23,9 @@ const AppRoute = createBrowserRouter([
             },
             {
                 path: "add-food",
-                element: <AddFood></AddFood>
+                element: <PrivateRoute>
+                    <AddFood></AddFood>
+                </PrivateRoute>
             }
         ]
     },
