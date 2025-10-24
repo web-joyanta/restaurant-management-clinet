@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const AddFood = () => {
     const { user } = useAuth?.() || {};
-    const categories = ["Starter", "Traditional", "Dessert", "Beverage", "Side"];
+    const categories = ["Starter", "Main Course", "Fast Food", "Japanese Cuisine", "Italian Cuisine", "Traditional", "Salad", "Dessert", "Beverage", "Noodles", "Side"];
     const axiosInstance = useAxios();
     const queryClient = useQueryClient();
 
@@ -39,6 +39,7 @@ const AddFood = () => {
             image,
             category,
             quantity: Number(quantity),
+            purchase: Number(0),
             price: Number(price),
             description,
             origin,
@@ -60,7 +61,7 @@ const AddFood = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 ">
-            <div className="bg-custom-orange text-white text-center py-16 mb-12">
+            <div className="bg-custom-orange text-white text-center py-20 mb-12">
                 <h2 className="text-5xl font-bold">Add Food</h2>
                 <p className="text-lg font-mono pt-2">Share your delicious creation</p>
             </div>

@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../Pages/Home";
 import Auth from "../Pages/Auth";
 import ErrorPage from "../pages/ErrorPage";
 import AddFood from "../pages/AddFood";
 import PrivateRoute from "./PrivateRoute";
+import Home from "../pages/Home";
+import AllFoods from "../pages/AllFoods";
 
 
 const AppRoute = createBrowserRouter([
@@ -22,11 +23,16 @@ const AppRoute = createBrowserRouter([
                 element: <Auth></Auth>
             },
             {
+                path: "all-foods",
+                element: <AllFoods></AllFoods>
+            },
+            {
                 path: "add-food",
                 element: <PrivateRoute>
                     <AddFood></AddFood>
                 </PrivateRoute>
-            }
+            },
+            
         ]
     },
 ]);

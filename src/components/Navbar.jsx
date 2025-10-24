@@ -10,9 +10,6 @@ const Navbar = () => {
         logOut();
     }
 
-    
-
-
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 50) {
@@ -28,7 +25,7 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/" className="font-medium hover:text-custom-orange text-[15px]">Home</NavLink></li>
-        <li><NavLink className="font-medium hover:text-custom-orange text-[15px]">All Foods</NavLink></li>
+        <li><NavLink to="all-foods" className="font-medium hover:text-custom-orange text-[15px]">All Foods</NavLink></li>
         <li><NavLink className="font-medium hover:text-custom-orange text-[15px]">Gallery</NavLink></li>
     </>
 
