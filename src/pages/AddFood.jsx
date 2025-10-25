@@ -60,7 +60,7 @@ const AddFood = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 ">
+        <div className="min-h-screen bg-gray-50 pb-20">
             <div className="bg-custom-orange text-white text-center py-20 mb-12">
                 <h2 className="text-5xl font-bold">Add Food</h2>
                 <p className="text-lg font-mono pt-2">Share your delicious creation</p>

@@ -6,6 +6,7 @@ import AddFood from "../pages/AddFood";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/Home";
 import AllFoods from "../pages/AllFoods";
+import FoodDetails from "../pages/FoodDetails";
 
 
 const AppRoute = createBrowserRouter([
@@ -25,6 +26,10 @@ const AppRoute = createBrowserRouter([
             {
                 path: "all-foods",
                 element: <AllFoods></AllFoods>
+            },
+            {
+                path: "food/:id",
+                element: <FoodDetails></FoodDetails>
             },
             {
                 path: "add-food",

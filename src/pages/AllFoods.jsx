@@ -23,10 +23,9 @@ const AllFoods = () => {
             </div>
         )
     }
-    console.log(data);
 
     return (
-        <div>
+        <div className="pb-20">
             <div className="bg-custom-orange text-white text-center py-20">
                 <h2 className="text-5xl font-bold">All Foods</h2>
                 <p className="text-lg font-mono pt-2">Explore our complete menu</p>
