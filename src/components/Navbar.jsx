@@ -39,7 +39,7 @@ const Navbar = () => {
     return (
         <nav className={`navbar sticky top-0 left-0 shadow-sm z-50 transition-all duration-500 ${isScrolled
             ? "bg-white/80 shadow-md backdrop-blur"
-            : "bg-transparent"
+            : "bg-custom-red-bg"
             }`} >
             {/* nav container */}
             <div className='flex container mx-auto px-4'>
@@ -79,7 +79,7 @@ const Navbar = () => {
                                     <img
                                         referrerPolicy='no-referrer'
                                         alt='User Profile Photo'
-                                        src={user?.photoURL} />
+                                        src={user?.photoURL || "https://i.ibb.co.com/qYXx2bJW/6515860.webp"} />
                                 </div>
                             </div>
                             <ul

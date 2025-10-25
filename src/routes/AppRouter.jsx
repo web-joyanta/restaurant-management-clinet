@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import Auth from "../Pages/Auth";
+import Auth from "../pages/Auth";
 import ErrorPage from "../pages/ErrorPage";
 import AddFood from "../pages/AddFood";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/Home";
 import AllFoods from "../pages/AllFoods";
 import FoodDetails from "../pages/FoodDetails";
-
+import Purchase from "../pages/Purchase";
 
 const AppRoute = createBrowserRouter([
     {
@@ -32,12 +32,18 @@ const AppRoute = createBrowserRouter([
                 element: <FoodDetails></FoodDetails>
             },
             {
+                path: "food-purchase/:id",
+                element: <PrivateRoute>
+                    <Purchase></Purchase>
+                </PrivateRoute>
+            },
+            {
                 path: "add-food",
                 element: <PrivateRoute>
                     <AddFood></AddFood>
                 </PrivateRoute>
             },
-            
+
         ]
     },
 ]);

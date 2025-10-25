@@ -1,16 +1,18 @@
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Auth = () => {
-
-    const { createUser, updateUserProfile, signInUser, singWithGoogle } = useAuth();
+    const { createUser, updateUserProfile, signInUser, singWithGoogle, setLoading } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const fromPath = location.state || "/";
 
     // Create new user
-    const handleCreateUser = (e) => {
+    const handleCreateUser = async (e) => {
         e.preventDefault();
         const from = e.target;
         const name = from.name.value;
@@ -33,37 +35,54 @@ const Auth = () => {
 
         // Create user
         try {
-            createUser(email, password)
+            await createUser(email, password)
                 // Update profile with name and photo
                 .then(() => {
                     updateUserProfile(name, photo);
                 });
-
             toast.success("User created successfully!");
             from.reset();
+            navigate(fromPath, { replace: true });
         } catch (err) {
-            toast.error(err.message);
+            if (err.code === "auth/email-already-in-use") {
+                toast.error("Email already in use.");
+            } else {
+                toast.error(err.message);
+            }
+
+        } finally {
+            setLoading(false);
         }
     };
 
     // Sign in user
-    const handleSingInUser = (e) => {
+    const handleSingInUser = async (e) => {
         e.preventDefault();
         const from = e.target;
         const email = from.email.value;
         const password = from.password.value;
         try {
-            signInUser(email, password);
+            await signInUser(email, password);
             toast.success("Logged in successfully!");
             from.reset();
+            navigate(fromPath, { replace: true });
         } catch (err) {
-            toast.error(err.message);
+            //  Firebase error handling
+            if (err.code === "auth/invalid-credential") {
+                toast.error("Invalid email or password. Try again!");
+            } else {
+                toast.error(err.message);
+            }
+        } finally {
+            setLoading(false);
         }
     }
 
     // Google sign in
-    const handleGoogleSignIn = () => {
-        singWithGoogle();
+    const handleGoogleSignIn = async () => {
+        await singWithGoogle();
+        setLoading(false);
+        navigate(fromPath, { replace: true });
     };
 
     return (
@@ -91,9 +110,9 @@ const Auth = () => {
                             <form onSubmit={handleSingInUser} className="card-body">
                                 <fieldset className="fieldset">
                                     <label className="label">Email</label>
-                                    <input name="email" type="email" autoComplete="email" className="input w-full" placeholder="Email" />
+                                    <input name="email" type="email" autoComplete="email" className="input w-full" placeholder="Email" required />
                                     <label className="label">Password</label>
-                                    <input name="password" type="password" autoComplete="current-password" className="input w-full" placeholder="Password" />
+                                    <input name="password" type="password" autoComplete="current-password" className="input w-full" placeholder="Password" required />
                                     <div><Link className="link link-hover">Forgot password?</Link></div>
 
                                     <button onClick={handleGoogleSignIn}
