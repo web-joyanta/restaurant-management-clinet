@@ -19,7 +19,7 @@ const FoodCard = ({ food }) => {
                     <span className="text-lg font-bold text-custom-orange">${price}</span>
                 </div>
                 <div className="flex justify-between">
-                    <div className="text-custom-gray"><BsBoxSeam className="inline mr-2" /><span>Qty: {quantity}</span></div>
+                    <div className="text-custom-gray"><BsBoxSeam className="inline mr-2" />Qty:<span className={`${quantity === 0 ? "text-red-500 font-semibold" : ""}`}> {quantity === 0 ? `${quantity} (Out of Stock)` : quantity}</span></div>
                     <div><p className="text-custom-gray">Origin: {origin}</p></div>
                 </div>
                 <div className="text-custom-gray"><LuShoppingCart className="inline mr-2" /><span>{purchase} sold</span></div>

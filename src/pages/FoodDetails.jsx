@@ -67,7 +67,7 @@ const FoodDetails = () => {
                                         <BsBoxSeam className="text-custom-gray"></BsBoxSeam>
                                         <span className="font-medium">Available Quantity:</span>
                                     </div>
-                                    <span className="font-bold text-custom-orange">{quantity}</span>
+                                    <span className={`${quantity === 0 ? 'text-red-500 font-bold' : 'font-bold text-custom-orange'}`}>{quantity === 0 ? '(Out of Stock)' : quantity}</span>
                                 </div>
 
                                 <div className="flex items-center justify-between">
@@ -90,7 +90,7 @@ const FoodDetails = () => {
                             <h3 className="text-2xl font-semibold mb-3">Description</h3>
                             <p className="text-custom-gray">{description}</p>
                         </div>
-                        <button onClick={handlePurchase} className="btn btn-orange w-full h-12 text-lg py-2">Purchase Now</button>
+                        <button onClick={handlePurchase} disabled={quantity === 0} className={`btn btn-orange w-full h-12 text-lg py-2 ${quantity === 0 ? 'text-custom-orange' : 'hover:scale-105'}`}>{quantity === 0 ? "Out of Stock" : "Purchase Now"}</button>
                     </div>
                 </div>
             </div>

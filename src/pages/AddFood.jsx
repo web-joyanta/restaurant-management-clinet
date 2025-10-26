@@ -1,26 +1,24 @@
-import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../hooks/useAuth";
-import useAxios from "../hooks/useAxios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
 const AddFood = () => {
     const { user } = useAuth?.() || {};
     const categories = ["Starter", "Main Course", "Fast Food", "Japanese Cuisine", "Italian Cuisine", "Traditional", "Salad", "Dessert", "Beverage", "Noodles", "Side"];
-    const axiosInstance = useAxios();
+
+    const axiosSecure = useAxiosSecure();
     const queryClient = useQueryClient();
 
     // Mutation for adding food item
     const { isPending, mutateAsync } = useMutation({
         mutationFn: async (fromData) => {
-            await axiosInstance.post("/foods", fromData);
+            await axiosSecure.post("/foods", fromData);
         },
         onSuccess: () => {
             toast.success("Food item added successfully!");
             queryClient.invalidateQueries({ queryKey: ['foods'] });
         },
-        onError: (error) => {
-            toast.error(`Error adding food item: ${error.message}`);
-        }
     });
 
     // Handle form submission
@@ -54,7 +52,7 @@ const AddFood = () => {
             await mutateAsync(fromData);
             form.reset();
         } catch (err) {
-            toast.error(err.message);
+            toast.error(`Error adding food item: ${err.message}`);
         }
 
     };
