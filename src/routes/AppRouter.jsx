@@ -10,6 +10,7 @@ import FoodDetails from "../pages/FoodDetails";
 import Purchase from "../pages/Purchase";
 import MyOrders from "../pages/MyOrders";
 import MyFoods from "../pages/MyFoods";
+import UpdateFood from "../pages/UpdateFood";
 
 const AppRoute = createBrowserRouter([
     {
@@ -57,6 +58,12 @@ const AppRoute = createBrowserRouter([
                     <AddFood></AddFood>
                 </PrivateRoute>
             },
+            {
+                path: "update-food/:id",
+                element: <PrivateRoute>
+                    <UpdateFood></UpdateFood>
+                </PrivateRoute>
+            }
 
         ]
     },

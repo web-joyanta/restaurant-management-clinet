@@ -1,9 +1,10 @@
 import { GrEdit } from "react-icons/gr";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const MyFoodCard = ({ food }) => {
-    const { name, image, category, price, quantity, origin, description } = food;
-    console.log(name, image, category, price, quantity, origin, description)
+    const { _id, name, image, category, price, quantity } = food;
+
     return (
         <div className="card bg-base-100 shadow-md 
                     hover:shadow-orange-200 hover:shadow-2xl 
@@ -24,7 +25,7 @@ const MyFoodCard = ({ food }) => {
                     <div>Qty: {quantity}</div>
                 </div>
                 <div className="flex justify-between gap-2 pt-2">
-                    <button className="flex-1 btn w-full hover:bg-custom-green hover:text-white"><GrEdit /> Update</button>
+                    <Link to={`/update-food/${_id}`} className="flex-1 btn w-full hover:bg-custom-green hover:text-white" ><GrEdit />Update</Link>
                     <button className="flex-1 btn bg-custom-red text-white w-full"><RiDeleteBinLine className="text-lg" />Delete</button>
                 </div>
             </div>

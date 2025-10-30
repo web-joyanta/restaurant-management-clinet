@@ -24,8 +24,6 @@ const MyFoods = () => {
         )
     }
 
-    console.log(data);
-
     return (
         <div className="pb-20">
             <div className="bg-custom-orange text-white text-center py-20 mb-12">
