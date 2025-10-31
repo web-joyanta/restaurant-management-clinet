@@ -90,7 +90,7 @@ const FoodDetails = () => {
                             <h3 className="text-2xl font-semibold mb-3">Description</h3>
                             <p className="text-custom-gray">{description}</p>
                         </div>
-                        <button onClick={handlePurchase} disabled={quantity === 0} className={`btn btn-orange w-full h-12 text-lg py-2 ${quantity === 0 ? 'text-custom-orange' : 'hover:scale-105'}`}>{quantity === 0 ? "Out of Stock" : "Purchase Now"}</button>
+                        <button onClick={handlePurchase} disabled={quantity === 0} className={`btn btn-orange w-full h-12 text-lg py-2 ${quantity === 0 ? 'text-custom-orange' : 'hover:bg-amber-600'}`}>{quantity === 0 ? "Out of Stock" : "Purchase Now"}</button>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ const Banner = () => {
                         Order your favorite dishes and experience culinary excellence delivered to your door.
                     </p>
                     <button className="btn text-custom-orange">
-                        <Link>Explore All Foods</Link>
+                        <Link to="all-foods">Explore All Foods</Link>
                     </button>
                 </div>
 
