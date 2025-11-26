@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from 'react-router-dom';
+import MyFoodCard from "../components/MyFoodCard";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import MyFoodCard from "../components/MyFoodCard";
 
 const MyFoods = () => {
     const axiosSecure = useAxiosSecure();
@@ -30,11 +31,23 @@ const MyFoods = () => {
                 <h2 className="text-5xl font-bold">My Foods</h2>
                 <p className="text-lg font-mono pt-2">Manage your food listings</p>
             </div>
-            <div className="container mx-auto px-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7">
-                    {data.map(food => <MyFoodCard key={food._id} food={food}></MyFoodCard>)}
-                </div>
+            <div className="container mx-auto px-4 mt-7">
+                {data && data.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                        {data.map(food => <MyFoodCard key={food._id} food={food} />)}
+                    </div>
+                ) : (
+                    <div className="flex flex-col justify-center items-center h-[30vh]">
+                        <p className="text-xl text-custom-gray mb-4">
+                            You haven't added any foods yet
+                        </p>
+                        <Link to="/all-foods" className="btn btn-orange">
+                            Add Your First Food
+                        </Link>
+                    </div>
+                )}
             </div>
+
         </div>
     );
 };

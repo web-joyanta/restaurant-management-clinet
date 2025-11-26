@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
@@ -26,7 +26,7 @@ const Navbar = () => {
     const links = <>
         <li><NavLink to="/" className="font-medium hover:text-custom-orange text-[15px]">Home</NavLink></li>
         <li><NavLink to="all-foods" className="font-medium hover:text-custom-orange text-[15px]">All Foods</NavLink></li>
-        <li><NavLink className="font-medium hover:text-custom-orange text-[15px]">Gallery</NavLink></li>
+        <li><NavLink to="gallery" className="font-medium hover:text-custom-orange text-[15px]">Gallery</NavLink></li>
     </>
 
     if (loading) {
