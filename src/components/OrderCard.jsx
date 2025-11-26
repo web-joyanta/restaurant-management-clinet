@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 import { FiCalendar } from "react-icons/fi";
 import { LuUser } from "react-icons/lu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import toast from "react-hot-toast";
 
 const OrderCard = ({ food }) => {
     const { _id, image, name, buyingDate, price, totalPrice, purchaseQuantity, addedBy: { email } } = food;
@@ -15,7 +15,7 @@ const OrderCard = ({ food }) => {
             await axiosSecure.delete(`/food/${foodId}`);
         },
         onSuccess: () => {
-            toast.success("deleted successfully!");
+            toast.success("Order Cancel successfully!");
             queryClient.invalidateQueries(["orders"]) // Refresh orders
         },
         onError: () => {

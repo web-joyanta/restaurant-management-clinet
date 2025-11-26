@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FoodCard from "../components/FoodCard";
 import useAxios from "../hooks/useAxios";
 
@@ -10,6 +10,12 @@ const AllFoods = () => {
     const [itemsPerPage] = useState(6);
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [foods, setFoods] = useState([]);
+    const [search, setSearch] = useState('');
+    const [filter, setFilter] = useState('');
+    const [sort, setSort] = useState('');
+
+
     // foods count
     const { data: foodsCount } = useQuery({
         queryKey: ['foods-count'],
@@ -19,28 +25,29 @@ const AllFoods = () => {
         }
     });
 
+    // dynamic navigation button
     const totalPages = Math.ceil((foodsCount?.count || 0) / itemsPerPage);
     const pages = [...Array(totalPages).keys()].map(num => num + 1);
 
-    // all data get
-    const { isPending, data } = useQuery({
-        queryKey: ['foods', currentPage, itemsPerPage],
-        queryFn: async () => {
-            const res = await axiosInstance.get(`/foods?page=${currentPage}&size=${itemsPerPage}`);
-            return res.data;
+    // get all foods data and controls
+    useEffect(() => {
+        const fetchFoods = async () => {
+            const res = await axiosInstance.get(
+                `/foods?page=${currentPage}&size=${itemsPerPage}&search=${search}&filter=${filter}&sort=${sort}`
+            );
+            setFoods(res.data);
         }
-    });
 
-    // data load pending
-    if (isPending) {
-        return (
-            <div className="flex justify-center items-center h-screen bg-gray-100">
-                <span className="loading loading-spinner text-orange-500 text-9xl"></span>
-            </div>
-        )
+        fetchFoods();
+    }, [currentPage, itemsPerPage, search, filter, sort]);
+
+    // reset button handler
+    const handleReset = () => {
+        setSearch('');
+        setFilter('');
+        setSort('');
     }
 
-    // 
     return (
         <div className="bg-gray-50 pb-20">
             <div className="bg-custom-orange text-white text-center py-20">
@@ -53,7 +60,7 @@ const AllFoods = () => {
                 <div className="bg-white rounded-xl shadow-md p-6">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-semibold text-gray-800">Filter & Search</h3>
-                        <button className="btn bg-custom-orange text-white">
+                        <button onClick={handleReset} className="btn bg-custom-orange text-white">
                             Reset
                         </button>
 
@@ -65,7 +72,8 @@ const AllFoods = () => {
                             <label className="label">
                                 <span className="label-text">Category</span>
                             </label>
-                            <select
+                            <select onChange={(e) => setFilter(e.target.value)}
+                                value={filter}
                                 className="select select-bordered w-full focus:border-custom-orange"
                             >
                                 <option value="">All Categories</option>
@@ -81,6 +89,9 @@ const AllFoods = () => {
                                 <span className="label-text">Search</span>
                             </label>
                             <input
+                                onChange={(e) => setSearch(e.target.value)}
+                                value={search}
+                                name='search'
                                 type="text"
                                 placeholder="Search foods by name..."
                                 className="input input-bordered w-full lg:border-2 lg:border-custom-orange  lg:rounded-4xl"
@@ -92,7 +103,7 @@ const AllFoods = () => {
                             <label className="label">
                                 <span className="label-text">Sort By</span>
                             </label>
-                            <select
+                            <select onChange={(e) => setSort(e.target.value)} value={sort}
                                 className="select select-bordered w-full focus:border-custom-orange"
                             >
                                 <option value="">Default</option>
@@ -104,7 +115,7 @@ const AllFoods = () => {
                 </div>
                 {/* grid col */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7">
-                    {data.map(food => <FoodCard key={food._id} food={food} ></FoodCard>)}
+                    {foods.map(food => <FoodCard key={food._id} food={food} ></FoodCard>)}
                 </div>
                 {/* navigation start*/}
                 <div className="flex mt-9 justify-center">
