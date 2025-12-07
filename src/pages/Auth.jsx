@@ -4,14 +4,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useAuth from "../hooks/useAuth";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Auth = () => {
     const { createUser, updateUserProfile, signInUser, singWithGoogle, setLoading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const fromPath = location.state || "/";
-    const axiosSecure = useAxiosSecure();
 
     // Create new user
     const handleCreateUser = async (e) => {
@@ -41,11 +39,6 @@ const Auth = () => {
                 // Update profile with name and photo
                 .then(() => {
                     updateUserProfile(name, photo);
-                    // jwt token generation
-                    axiosSecure.post('/jwt', { email })
-                        .then(res => {
-                            console.log(res.data);
-                        })
                 });
 
             toast.success("User created successfully!");

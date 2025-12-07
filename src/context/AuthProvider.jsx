@@ -1,12 +1,14 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react';
 import { auth } from '../firebase/firebase.config';
+import useAxios from '../hooks/useAxios';
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const axiosInstance = useAxios();
 
     // Google Provider
     const googleProvider = new GoogleAuthProvider();
@@ -47,12 +49,26 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            setLoading(false);
+            if (currentUser?.email) {
+                // jwt token generation
+                axiosInstance.post('/login', { email: currentUser.email })
+                    .then(res => {
+                        console.log('login:', res.data);
+                        setLoading(false);
+                    });
+            } else {
+                // jwt token removal
+                axiosInstance.post('/logout', {})
+                    .then(res => {
+                        console.log('logout:', res.data);
+                        setLoading(false);
+                    });
+            };
         });
         return () => {
             return unsubscribe();
         };
-    }, []);
+    }, [axiosInstance]);
 
     const authInfo = {
         user,
