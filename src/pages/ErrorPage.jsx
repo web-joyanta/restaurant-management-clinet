@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import { motion } from "motion/react";
 
 const ErrorPage = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: [0, 1], y: [50, 0] }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <div className="w-full max-w-xl bg-white shadow-lg rounded-lg p-8 text-center">
                 <div className="text-7xl font-extrabold text-custom-orange">404</div>
                 <h1 className="mt-4 text-2xl font-semibold">Page not found</h1>
@@ -20,7 +25,7 @@ const ErrorPage = () => {
                     If you think this is an error, please report it to support.
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

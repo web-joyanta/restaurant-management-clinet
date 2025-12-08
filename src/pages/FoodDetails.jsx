@@ -6,6 +6,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { LuShoppingCart, LuUser } from "react-icons/lu";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import { motion } from "motion/react";
 
 const FoodDetails = () => {
     const { id } = useParams();
@@ -43,10 +44,19 @@ const FoodDetails = () => {
             <div className="container mx-auto px-4 py-12">
                 {/* main grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div>
-                        <img src={image} alt="food" className="w-full h-[500px] object-cover rounded-2xl shadow-warm" />
-                    </div>
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    >
+                        <img
+                            src={image} alt="food" className="w-full h-[500px] object-cover rounded-2xl shadow-warm" />
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                        className="space-y-6">
                         <div className="space-y-6">
                             <div className="flex items-center gap-3 mb-4">
                                 <div className="rounded-full border font-semibold btn-orange text-lg px-4 py-1">
@@ -91,7 +101,7 @@ const FoodDetails = () => {
                             <p className="text-custom-gray">{description}</p>
                         </div>
                         <button onClick={handlePurchase} disabled={quantity === 0} className={`btn btn-orange w-full h-12 text-lg py-2 ${quantity === 0 ? 'text-custom-orange' : 'hover:bg-amber-600'}`}>{quantity === 0 ? "Out of Stock" : "Purchase Now"}</button>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>

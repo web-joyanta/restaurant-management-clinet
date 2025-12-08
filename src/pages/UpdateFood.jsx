@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { motion } from "motion/react";
 
 const UpdateFood = () => {
     const { id } = useParams();
@@ -73,10 +74,20 @@ const UpdateFood = () => {
     return (
         <div className="bg-gray-50 pb-20">
             <div className="bg-custom-orange text-white text-center py-20 mb-12">
-                <h2 className="text-5xl font-bold">Update Food</h2>
-                <p className="text-lg font-mono pt-2">Modify food details easily</p>
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                >
+                    <h2 className="text-5xl font-bold">Update Food</h2>
+                    <p className="text-lg font-mono pt-2">Modify food details easily</p>
+                </motion.div>
             </div>
-            <div className="max-w-3xl mx-auto bg-white shadow rounded-lg p-6 my-12">
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: [0, 1], y: [50, 0] }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                className="max-w-3xl mx-auto bg-white shadow rounded-lg p-6 my-12">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">Food Details</h2>
 
                 <form onSubmit={handleUpdateFood} className="space-y-4">
@@ -197,7 +208,7 @@ const UpdateFood = () => {
                         </button>
                     </div>
                 </form>
-            </div>
+            </motion.div>
         </div>
     );
 };

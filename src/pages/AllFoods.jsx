@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import FoodCard from "../components/FoodCard";
 import useAxios from "../hooks/useAxios";
+import { motion } from "motion/react";
 
 const AllFoods = () => {
     const categories = ["Starter", "Main Course", "Fast Food", "Japanese Cuisine", "Italian Cuisine", "Traditional", "Salad", "Dessert", "Beverage", "Noodles", "Side"];
@@ -51,13 +52,23 @@ const AllFoods = () => {
     return (
         <div className="bg-gray-50 pb-20">
             <div className="bg-custom-orange text-white text-center py-20">
-                <h2 className="text-5xl font-bold">All Foods</h2>
-                <p className="text-lg font-mono pt-2">Explore our complete menu</p>
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    className="space-y-2">
+                    <h2 className="text-5xl font-bold">All Foods</h2>
+                    <p className="text-lg font-mono pt-2">Explore our complete menu</p>
+                </motion.div>
             </div>
 
             {/* container section */}
             <div className="container mx-auto px-4 mb-12 mt-7">
-                <div className="bg-white rounded-xl shadow-md p-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    className="bg-white rounded-xl shadow-md p-6">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-semibold text-gray-800">Filter & Search</h3>
                         <button onClick={handleReset} className="btn bg-custom-orange text-white">
@@ -112,11 +123,15 @@ const AllFoods = () => {
                             </select>
                         </div>
                     </div>
-                </div>
+                </motion.div>
                 {/* grid col */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-7">
                     {foods.map(food => <FoodCard key={food._id} food={food} ></FoodCard>)}
-                </div>
+                </motion.div>
                 {/* navigation start*/}
                 <div className="flex mt-9 justify-center">
                     <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className="flex shadow items-center justify-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md rtl:-scale-x-100 dark:bg-gray-800 dark:text-gray-200 hover:bg-custom-orange dark:hover:bg-custom-orange hover:text-white dark:hover:text-gray-200">

@@ -5,6 +5,8 @@ import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
+import { motion } from "motion/react";
+
 
 const Purchase = () => {
     const { id } = useParams();
@@ -94,7 +96,11 @@ const Purchase = () => {
     }
 
     return (
-        <div className="bg-custom-red-bg pb-20">
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: [0, 1], y: [50, 0] }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="bg-custom-red-bg pb-20">
             <div className="container mx-auto px-4 py-12">
                 <div className="bg-white rounded-lg shadow-sm max-w-2xl mx-auto">
                     <div className="flex flex-col space-y-1.5 p-6">
@@ -135,7 +141,7 @@ const Purchase = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

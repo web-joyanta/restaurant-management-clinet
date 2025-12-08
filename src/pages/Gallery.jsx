@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { motion } from "motion/react";
 
 // Gallery images
 const galleryImages = [
@@ -30,13 +31,23 @@ const Gallery = () => {
     return (
         <div className="bg-gray-50 pb-20">
             <div className="bg-custom-orange text-white text-center py-20">
-                <h2 className="text-5xl font-bold">Gallery</h2>
-                <p className="text-lg font-mono pt-2">Explore our culinary masterpieces</p>
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    className="space-y-2">
+                    <h2 className="text-5xl font-bold">Gallery</h2>
+                    <p className="text-lg font-mono pt-2">Explore our delicious food collection</p>
+                </motion.div>
             </div>
 
             {/* Gallery Grid */}
             <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {galleryImages.map((image, index) => (
                         <div
                             key={index}
@@ -56,7 +67,7 @@ const Gallery = () => {
                             </div>
                         </div>
                     ))}
-                </div>
+                </motion.div>
             </div>
 
             {/* Single Lightbox */}

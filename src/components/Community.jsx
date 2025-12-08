@@ -1,19 +1,28 @@
 import React from "react";
 import { FaUsers, FaRegComments, FaHeart } from "react-icons/fa";
+import { motion } from "motion/react";
 
 const Community = () => {
     return (
         <section className="bg-orange-50 rounded-lg shadow-md">
             <div className="container mx-auto py-16 px-4">
-                <div className="text-center mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    className="text-center mb-8">
                     <h2 className="text-4xl font-bold mb-5">Join Our Food Community</h2>
                     <p className="text-lg text-custom-gray font-mono mt-4">
                         A friendly community of chefs, food lovers and restaurant partners <br /> — share recipes, reviews and grow together.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+                    className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
                     <div className="group flex items-center gap-4 p-6 bg-gradient-to-br from-white to-orange-50 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl transition-all duration-300 cursor-pointer border border-orange-100/20">
                         <div className="text-3xl text-custom-orange group-hover:scale-110 transition-transform"><FaUsers /></div>
                         <div>
@@ -37,10 +46,14 @@ const Community = () => {
                             <div className="text-sm text-custom-gray">Favorites Saved</div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* Testimonials / Community Voices */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <article className="group bg-white rounded-xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-2xl transition-all duration-300">
                         <div className="relative">
                             <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
@@ -123,11 +136,16 @@ const Community = () => {
                             </div>
                         </div>
                     </article>
-                </div>
+                </motion.div>
 
                 {/* Contributors / Avatars */}
-                <div className="flex justify-center items-center gap-4 mb-8">
-                    <div className="flex -space-x-3">
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
+                    className="flex justify-center items-center gap-4 mb-8">
+                    <div
+                        className="flex -space-x-3">
                         <img className="w-12 h-12 rounded-full ring-4 ring-white shadow-lg transform hover:scale-110 hover:z-10 transition-all duration-300 cursor-pointer object-cover"
                             src="https://i.ibb.co.com/d4xt4vwj/Colors-in-Profile-Pictures.jpg"
                             alt="contrib1" />
@@ -144,7 +162,7 @@ const Community = () => {
                     <div className="text-sm font-medium text-custom-gray bg-white px-4 py-2 rounded-full shadow-md">
                         Join 200+ contributors sharing recipes, photos and tips.
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

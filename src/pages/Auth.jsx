@@ -4,12 +4,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import useAuth from "../hooks/useAuth";
+import { motion } from "motion/react";
 
 const Auth = () => {
     const { createUser, updateUserProfile, signInUser, singWithGoogle, setLoading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const fromPath = location.state || "/";
+    console.log(fromPath);
 
     // Create new user
     const handleCreateUser = async (e) => {
@@ -89,9 +91,16 @@ const Auth = () => {
     return (
         <div className='bg-custom-red-bg'>
             <div className="container mx-auto px-4 min-h-[calc(100vh-64px)] flex flex-col justify-center items-center">
-                <h1 className='text-3xl font-bold text-custom-orange'>Welcome to DelightBites</h1>
-                <p className='text-custom-gray mt-2'>Your culinary journey starts here</p>
-                <Tabs>
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: [0, 1], y: [50, 0] }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    className="text-center mb-8">
+                    <h1 className='text-3xl font-bold text-custom-orange'>Welcome to DelightBites</h1>
+                    <p className='text-custom-gray mt-2'>Your culinary journey starts here</p>
+                </motion.div>
+                <Tabs
+                    className="w-full max-w-md">
                     <div className="card bg-base-100 w-sm md:w-lg mx-auto shadow-2xl mt-7">
                         <div className='px-6'>
                             <div className='py-6'>
