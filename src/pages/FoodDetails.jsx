@@ -59,7 +59,7 @@ const FoodDetails = () => {
                         className="space-y-6">
                         <div className="space-y-6">
                             <div className="flex items-center gap-3 mb-4">
-                                <div className="rounded-full border font-semibold btn-orange text-lg px-4 py-1">
+                                <div className="rounded-full border font-semibold text-white font-medium rounded-md border-0 bg-[#d26f2d] text-lg px-4 py-1">
                                     {category}
                                 </div>
                                 <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold text-sm border-custom-gray">
@@ -100,7 +100,7 @@ const FoodDetails = () => {
                             <h3 className="text-2xl font-semibold mb-3">Description</h3>
                             <p className="text-custom-gray">{description}</p>
                         </div>
-                        <button onClick={handlePurchase} disabled={quantity === 0} className={`btn btn-orange w-full h-12 text-lg py-2 ${quantity === 0 ? 'text-custom-orange' : 'hover:bg-amber-600'}`}>{quantity === 0 ? "Out of Stock" : "Purchase Now"}</button>
+                        <button onClick={handlePurchase} disabled={quantity === 0} className={`btn text-white font-medium rounded-md border-0 bg-[#d26f2d] w-full h-12 text-lg py-2 ${quantity === 0 ? 'text-custom-orange' : 'hover:bg-amber-600'}`}>{quantity === 0 ? "Out of Stock" : "Purchase Now"}</button>
                     </motion.div>
                 </div>
             </div>

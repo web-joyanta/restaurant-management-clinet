@@ -42,7 +42,7 @@ const TopFoods = () => {
                 {data.map(food => <FoodCard key={food._id} food={food} ></FoodCard>)}
             </motion.div>
             <div className='flex justify-center pt-10'>
-                <Link to="all-foods" className='btn btn-orange'>View All Foods</Link>
+                <Link to="all-foods" className='btn text-white font-medium rounded-md border-0 bg-[#d26f2d]'>View All Foods</Link>
             </div>
         </div>
     );

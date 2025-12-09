@@ -52,7 +52,7 @@ const MyOrders = () => {
                         <p className="text-xl text-custom-gray mb-4">
                             You haven't placed any orders yet
                         </p>
-                        <Link to="/all-foods" className="btn btn-orange">
+                        <Link to="/all-foods" className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d]">
                             Browse Foods
                         </Link>
                     </div>

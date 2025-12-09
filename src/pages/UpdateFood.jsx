@@ -203,7 +203,7 @@ const UpdateFood = () => {
                     <div className="pt-2">
                         <button
                             type="submit"
-                            className="btn btn-orange w-full"
+                            className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d] w-full"
                         > {isPending ? "Updating" : "Update Food"}
                         </button>
                     </div>

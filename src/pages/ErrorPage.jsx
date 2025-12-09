@@ -16,7 +16,7 @@ const ErrorPage = () => {
                 </p>
 
                 <div className="mt-6">
-                    <Link to="/" className="btn btn-orange px-6">
+                    <Link to="/" className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d] px-6">
                         Go Home
                     </Link>
                 </div>

@@ -2,10 +2,14 @@ import Lottie from "lottie-react";
 import foodLottieAnimation from '../assets/lottie/hero-food.json';
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import heroBanner from '../assets/hero-banner.jpg';
 
 const Banner = () => {
     return (
-        <div className="flex items-center text-white min-h-[600px] bg-[url('src/assets/hero-banner.jpg')] bg-black/80 bg-blend-overlay bg-center bg-cover bg-no-repeat py-6">
+        <div
+            className="flex items-center text-white min-h-[600px] bg-black/80 bg-blend-overlay bg-center bg-cover bg-no-repeat py-6"
+            style={{ backgroundImage: `url(${heroBanner})` }}
+        >
             <div className="container mx-auto px-4 flex flex-col-reverse md:flex-row justify-between items-center gap-10">
 
                 {/* Left: Text (will appear below on small, left on large) */}

@@ -133,7 +133,7 @@ const Auth = () => {
                                         Continue with Google
                                     </button>
 
-                                    <button className="btn btn-orange mt-4">Sing In</button>
+                                    <button className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d] mt-4">Sing In</button>
                                 </fieldset>
                             </form>
                         </TabPanel>
@@ -161,7 +161,7 @@ const Auth = () => {
                                         Continue with Google
                                     </button>
 
-                                    <button className="btn btn-orange mt-4">Create Account</button>
+                                    <button className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d] mt-4">Create Account</button>
                                 </fieldset>
                             </form>
                         </TabPanel>

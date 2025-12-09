@@ -11,7 +11,7 @@ const FoodCard = ({ food }) => {
                     src={image}
                     className="w-full h-56 object-cover transform transition-transform duration-500 ease-out group-hover:scale-110"
                     alt="Shoes" />
-                <span className="absolute btn-orange font-medium  px-2 right-3 top-3">{category}</span>
+                <span className="absolute text-white font-medium rounded-md border-0 bg-[#d26f2d] font-medium  px-2 right-3 top-3">{category}</span>
             </figure>
             <div className="card-body">
                 <div className="flex justify-between">
@@ -24,7 +24,7 @@ const FoodCard = ({ food }) => {
                 </div>
                 <div className="text-custom-gray"><LuShoppingCart className="inline mr-2" /><span>{purchase} sold</span></div>
                 <div className="card-actions justify-center pt-2">
-                    <Link to={`/food/${_id}`} className="btn btn-orange w-full btn-primary">View Details</Link>
+                    <Link to={`/food/${_id}`} className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d] w-full btn-primary">View Details</Link>
                 </div>
             </div>
         </div>

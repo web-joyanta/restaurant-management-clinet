@@ -136,7 +136,7 @@ const Purchase = () => {
                                     <input className="flex h-10 w-full rounded-md border px-3 py-2 text-base md:text-sm bg-custom-red-bg" readonly value={user?.email} />
                                 </div>
                             </div>
-                            <button className="btn btn-orange w-full h-12 text-lg py-2">{isPending ? 'Processing' : 'Confirm Purchase'}</button>
+                            <button className="btn text-white font-medium rounded-md border-0 bg-[#d26f2d] w-full h-12 text-lg py-2">{isPending ? 'Processing' : 'Confirm Purchase'}</button>
                         </form>
                     </div>
                 </div>
