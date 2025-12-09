@@ -127,14 +127,12 @@ This project is designed to meet real-world functionality and recruiter-friendly
 - VITE_storageBucket=xxxx
 - VITE_messagingSenderId=xxxx
 - VITE_appId=xxxx
-- VITE_server_url=https://your-server-url.com
 
 ### Server `.env`
 
 - PORT=5000
 - MONGO_URI=your_mongodb_connection_string
 - JWT_SECRET=your_secret_key
-- CLIENT_URL=https://your-frontend-domain.com
 
 ---
 
